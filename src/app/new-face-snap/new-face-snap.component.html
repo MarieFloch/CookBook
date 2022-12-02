@@ -27,7 +27,7 @@
             <input id="localisationImg" type="text" formControlName="localisationImg">
         </div>
 
-        <button type="submit" (click)="onSubmitForm()" [disabled]="snapForm.invalid"> Enregistrer </button>
+        <button type="submit" (click)="onSubmitForm()"> Enregistrer </button>
     </form>
 </div>
 
@@ -36,5 +36,6 @@
     <p>Mis en ligne {{ faceSnap.date | date: 'à HH:mm, le d MMMM yyyy' }}</p>
     <img [src]="faceSnap.imageUrl" [alt]="faceSnap.titre">
     <p>{{ faceSnap.description }}</p>
+    <p>{{ faceSnap.recette }}</p>
     <p *ngIf="faceSnap.localisationImg">Photo prise à {{ faceSnap.localisationImg }}</p>
 </div>
