@@ -8,25 +8,19 @@ import { FaceSnapsService } from '../services/face-snaps.service';
   templateUrl: './face-snap-list.component.html',
   styleUrls: ['./face-snap-list.component.scss']
 })
-export class FaceSnapListComponent implements OnInit, OnDestroy {
+export class FaceSnapListComponent implements OnInit {
 
-  faceSnaps !: FaceSnap[];
-  private destroy$ !: Subject<boolean>;
+
+  faceSnaps$ !: Observable<FaceSnap[]>;
 
 
   constructor(private faceSnapsService : FaceSnapsService) { }
 
   ngOnInit(): void {
-    this.destroy$ = new Subject<boolean>();
-    this.faceSnaps = this.faceSnapsService.listeSnaps;
-    interval(1000).pipe(
-      tap(console.log),
-      takeUntil(this.destroy$)
-    ).subscribe()
+    this.faceSnaps$ = this.faceSnapsService.getAllFaceSnaps();
+
   }
 
-  ngOnDestroy(): void {
-    this.destroy$.next(true);
-  }
+
 
 }

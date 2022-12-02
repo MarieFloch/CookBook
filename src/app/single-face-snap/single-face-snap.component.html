@@ -1,10 +1,10 @@
-<div class="face-snap-card" [ngClass]="{ 'snapped': buttonMessage == 'Oups, déjà liké !' }">
+<div class="face-snap-card" *ngIf=" singleFaceSnap$ | async as faceSnap" [ngClass]="{ 'snapped': buttonMessage == 'Oups, déjà liké !' }">
     <h2> {{faceSnap.titre | uppercase }} </h2>
     <p> {{faceSnap.description}}</p>
     <p class="recette"> {{faceSnap.recette}}</p>
     <img [src]="faceSnap.imageUrl" [alt]="faceSnap.titre">
     <p>
-        <button (click)="onAddSnap()"> {{buttonMessage}}</button>
+        <button (click)="onAddSnap(faceSnap.id)"> {{buttonMessage}}</button>
         <span [ngStyle] = "{color : 'rgb(0, ' + faceSnap.snaps + ', 0)'}"> 🤌{{faceSnap.snaps}} </span>
     </p>
 

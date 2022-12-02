@@ -1,10 +1,15 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+import { map, Observable, switchMap } from 'rxjs';
 import { FaceSnap } from '../models/face-snap.models';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FaceSnapsService {
+
+  constructor(private http: HttpClient) {}
 
   listeSnaps : FaceSnap[] = [
     {
@@ -32,35 +37,39 @@ export class FaceSnapsService {
       recette : "1) Découper les filets de poulet en petits morceaux. \n 2) Faire mariner le poulet dans deux à trois cuillères de pesto. \n 3) Pendant ce temps, couper l'oignon en petits morceaux. \n 4) Dorer l'oignon dans une poêle huilée pendant 3 min. \n 5) Cuire les spaghettis. \n 6) Une fois l’oignon doré, ajouter le poulet, les tomates marinées et la crème liquide. \n 7) Laisser mijoter à feu doux pendant 5 min. \n 8) Ajouter les spaghettis à la préparation et bien mélanger.",
       imageUrl: 'assets/pates_pesto.jpg',
       date: new Date(),
-      snaps: 160
+      snaps: 165
     }
 
   ]
 
-  getAllFaceSnaps() : FaceSnap[] {
-   return this.listeSnaps;
+  getAllFaceSnaps() : Observable<FaceSnap[]> {
+   return this.http.get<FaceSnap[]>('http://localhost:3004/facesnaps');
   }
 
-  faceSnapById(identifiant : number, snapType : 'snap' | 'unsnap') : void {
-    const faceSnap = this.listeSnaps.find(snaps => snaps.id === identifiant);
-    if ( faceSnap ) {
-      if ( snapType == 'snap') {
-        faceSnap.snaps ++;
-      } else if ( snapType == 'unsnap' ) {
-        faceSnap.snaps --;
-      }
-    } else {
-      throw new Error('FaceSnap not found!');
-    }
+  faceSnapById(identifiant : number, snapType : 'snap' | 'unsnap') : Observable<FaceSnap> {
+    return this.getFaceSnapById(identifiant).pipe(
+      map(faceSnap =>({
+        ...faceSnap,
+        snaps : faceSnap.snaps + (snapType === 'snap' ? 1 : -1)
+      })),
+      switchMap(updatedFaceSnap => this.http.put<FaceSnap>(`http://localhost:3004/facesnaps/${identifiant}`,updatedFaceSnap))
+    );
   }
 
-  getFaceSnapById(identifiant : number) : FaceSnap {
-    const faceSnap = this.listeSnaps.find(snaps => snaps.id === identifiant);
-    if ( !faceSnap ) {
-      throw new Error('FaceSnap not found!');
-    } else {
-      return faceSnap;
+  getFaceSnapById(identifiant : number) : Observable<FaceSnap> {
+    return this.http.get<FaceSnap>(`http://localhost:3004/facesnaps/${identifiant}`);
+  }
 
+  getNewFaceSnap(formValues : {titre : string, description : string, recette : string, imageUrl : string, location ?: string}) {
+    const faceSnapList$ : Observable<FaceSnap[]> = this.getAllFaceSnaps();
+    const faceSnap : FaceSnap = {
+      ...formValues,
+      id : 0,
+      snaps : 0,
+      date : new Date()
     }
+
+    this.listeSnaps.push(faceSnap);
+
   }
 }

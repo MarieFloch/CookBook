@@ -27,7 +27,7 @@
             <input id="localisationImg" type="text" formControlName="localisationImg">
         </div>
 
-        <button type="submit" (click)="onSubmitForm()"> Enregistrer </button>
+        <button type="submit" (click)="onSubmitForm()" [disabled]="snapForm.invalid"> Enregistrer </button>
     </form>
 </div>
 
