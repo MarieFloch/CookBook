@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { filter, interval, map, Observable, tap } from 'rxjs';
-import { FaceSnap } from './models/face-snap.models';
+import { FaceSnap } from './core/models/face-snap.models';
 
 @Component({
   selector: 'app-root',
