@@ -11,6 +11,8 @@ import { LandingPageModule } from './landing-page/landing-page.module';
 import { NgModule } from '@angular/core';
 import { LoginComponent } from './auth/components/login/login.component';
 import { AuthModule } from './auth/auth.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 @NgModule({
   declarations: [
@@ -25,7 +27,8 @@ import { AuthModule } from './auth/auth.module';
     ReactiveFormsModule,
     HttpClientModule,
     CoreModule,
-    LandingPageModule
+    LandingPageModule,
+    BrowserAnimationsModule,
   ],
   bootstrap: [AppComponent]
 })

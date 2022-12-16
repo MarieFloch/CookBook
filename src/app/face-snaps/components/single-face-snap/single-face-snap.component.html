@@ -1,12 +1,16 @@
 <div class="face-snap-card" *ngIf=" singleFaceSnap$ | async as faceSnap" [ngClass]="{ 'snapped': buttonMessage == 'Oups, déjà liké !' }">
+     <p class="like">
+        <button (click)="onAddSnap(faceSnap.id)"> {{buttonMessage}}</button>
+        <span [ngStyle] = "{color : 'rgb(0, ' + faceSnap.snaps + ', 0)'}"> ❤️ {{faceSnap.snaps}} </span>
+    </p>
     <h2> {{faceSnap.titre | uppercase }} </h2>
     <p> {{faceSnap.description}}</p>
-    <p class="recette"> {{faceSnap.recette}}</p>
+    <p class="titre"> Ingrédients : </p>
+    <p class="ingredients"> {{faceSnap.ingredients}}</p>
+    <p class="titre"> Recette : </p>
+    <p class="recette">{{faceSnap.recette}}</p>
     <img [src]="faceSnap.imageUrl" [alt]="faceSnap.titre">
-    <p>
-        <button (click)="onAddSnap(faceSnap.id)"> {{buttonMessage}}</button>
-        <span [ngStyle] = "{color : 'rgb(0, ' + faceSnap.snaps + ', 0)'}"> 🤌{{faceSnap.snaps}} </span>
-    </p>
+
 
     <p> Mis en ligne le {{faceSnap.date | date : 'dd/MM/yy, à HH:mm'}}</p>
     <button (click)="retour()"> Retour </button>

@@ -27,6 +27,7 @@ export class NewFaceSnapComponent implements OnInit {
     this.snapForm = this.formBuilder.group({
       titre: [null, Validators.required],
       description: [null, Validators.required],
+      ingredients: [null, Validators.required],
       recette: [null, Validators.required],
       imageUrl: [null]/*[null, Validators.pattern(this.urlRegex)]*/,
       localisationImg: [null]

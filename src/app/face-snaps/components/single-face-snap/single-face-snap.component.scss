@@ -4,18 +4,26 @@
     margin: 20px auto;
     padding: 10px 30px;
     box-shadow: lightgray 4px 4px 20px;
+
+    p.like {
+      float: right;
+    }
+
     img {
       width: 50%;
       margin : auto;
       display: block;
     }
+
     h2 {
       margin-bottom: 0;
     }
+
     p {
       font-weight: 300;
       font-size: 16px;
     }
+
     button {
       background-color: transparent;
       box-sizing: border-box;
@@ -32,7 +40,17 @@
       }
     }
 
-    p.recette{
+    p.titre {
+      text-decoration: underline;
+      font-weight: 300;
+    }
+
+    p.ingredients {
+      font-style: italic;
+      white-space: pre;
+    }
+
+    p.recette {
       white-space: pre;
     }
   }

@@ -1,0 +1,28 @@
+.filtres {
+    box-sizing: border-box;
+    width: 50%;
+    margin: 20px auto;
+    padding: 10px 30px;
+    border: solid rgb(157, 86, 130);
+    //box-shadow: rgb(157, 86, 130) 4px 4px 20px;
+
+    button {
+        font-size: .9rem;
+        box-sizing: border-box;
+        margin: 20px 15px;
+        padding: 2px 5px;
+    }
+}
+
+
+
+label {
+    font-family: sans-serif;
+    font-size: 1rem;
+    padding-right: 10px;
+}
+
+select {
+    font-size: .9rem;
+    padding: 2px 5px;
+}

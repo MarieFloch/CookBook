@@ -1,1 +1,35 @@
+<div class="filtres">
+  <mat-form-field appearance="fill">
+    <mat-label>Type de recette</mat-label>
+    <mat-select [(value)]="selected">
+      <mat-option value="Tout">Tout</mat-option>
+      <mat-option value="Plat végétarien">Recettes végétarienne</mat-option>
+      <mat-option value="Plat avec viande">Recettes avec viande</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Difficulté</mat-label>
+    <mat-select [(value)]="selected_difficultes">
+      <mat-option value="Tout">Tout</mat-option>
+      <mat-option value="Très facile">Très facile</mat-option>
+      <mat-option value="Facile">Facile</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Tri</mat-label>
+    <mat-select [(value)]="selected_tri">
+      <mat-option value="Aucun">Aucun</mat-option>
+      <mat-option value="Tri par titre">Trier par titre (A-Z)</mat-option>
+      <mat-option value="Tri par like">Trier par nombre de like</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <button (click)="choose(selected, selected_difficultes, selected_tri)"> Filtrer</button>
+</div>
+
+
+
+
 <app-face-snap *ngFor="let snaps of faceSnaps$ | async" [faceSnap] = "snaps"></app-face-snap>

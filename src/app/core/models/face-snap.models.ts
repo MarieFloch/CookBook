@@ -2,9 +2,11 @@ export class FaceSnap {
     id !: number ;
     titre !: string;
     description !: string;
+    ingredients !: string;
     recette !: string;
     date !: Date;
     snaps !: number;
+    difficulte ?: string;
     imageUrl !: string;
     localisationImg ?: string;
 

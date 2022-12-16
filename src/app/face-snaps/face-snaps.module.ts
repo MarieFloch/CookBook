@@ -7,6 +7,8 @@ import { NewFaceSnapComponent } from './components/new-face-snap/new-face-snap.c
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FaceSnapsRoutingModule } from './face-snaps-routing.module';
+import { MatSelectModule } from '@angular/material/select';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 
 
@@ -20,13 +22,17 @@ import { FaceSnapsRoutingModule } from './face-snaps-routing.module';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    FaceSnapsRoutingModule
+    FaceSnapsRoutingModule,
+    MatSelectModule,
+    MatFormFieldModule
   ],
   exports: [
     FaceSnapComponent,
     FaceSnapListComponent,
     SingleFaceSnapComponent,
-    NewFaceSnapComponent
+    NewFaceSnapComponent,
+    MatSelectModule,
+    MatFormFieldModule
   ],
 })
 export class FaceSnapsModule { }

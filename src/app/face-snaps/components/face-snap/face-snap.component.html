@@ -1,5 +1,7 @@
 <div class="face-snap-card" [ngClass]="{ 'snapped': buttonMessage == 'Oups, un snap !' }">
+    <span>  {{faceSnap.difficulte}} </span>
     <h2> {{faceSnap.titre | uppercase }} </h2>
     <p> {{faceSnap.description}}</p>
     <button (click)="viewSnap()"> VOIR </button>
+    <span> ❤️{{faceSnap.snaps}} </span>
 </div>
