@@ -1,10 +1,15 @@
 .landing-block {
-    position: absolute;
-    margin-top: 80px;
-    top: 70%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    margin: 0 auto;
+    width: 100%;
 
+  .image {
+    img {
+      width: 1500px;
+      display: block;
+      margin-right: auto;
+      margin-left: auto;
+    }
+  }
 
   .landing-links {
     width: 100%;
@@ -31,6 +36,7 @@
 
   .form {
     margin-bottom: 50px;
+    text-align: center;
 
     input[type=email] {
       margin-right: 10px;

@@ -9,6 +9,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FaceSnapsRoutingModule } from './face-snaps-routing.module';
 import { MatSelectModule } from '@angular/material/select';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatGridListModule} from '@angular/material/grid-list';
 
 
 
@@ -24,7 +25,9 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     ReactiveFormsModule,
     FaceSnapsRoutingModule,
     MatSelectModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatGridListModule
+
   ],
   exports: [
     FaceSnapComponent,
@@ -32,7 +35,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     SingleFaceSnapComponent,
     NewFaceSnapComponent,
     MatSelectModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatGridListModule
   ],
 })
 export class FaceSnapsModule { }

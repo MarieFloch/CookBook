@@ -1,8 +1,8 @@
 <div class="landing-block">
 
-    <img class="left" src="assets/logo.png" alt="Logo">
-
-
+  <div class="image">
+    <img src="assets/accueil.jpg" alt="Logo">
+  </div>
 
   <div class="landing-links">
     <button (click)="goPath()">Accéder au cook book</button>
@@ -10,7 +10,7 @@
 
   <div class="form">
     <form #emailForm="ngForm" (ngSubmit)="onSubmitForm(emailForm)">
-      <label for="emailInput"> Inscrivez-vous pour recevoir la newsletter !   </label>
+      <label for="emailInput"> Inscrivez-vous pour recevoir la newsletter ! </label>
       <input type="email" id="emailInput" name="userEmail" [(ngModel)]="userEmail">
       <button type="submit">OK!</button>
     </form>

@@ -1,7 +1,10 @@
 <div class="face-snap-card" [ngClass]="{ 'snapped': buttonMessage == 'Oups, un snap !' }">
-    <span>  {{faceSnap.difficulte}} </span>
-    <h2> {{faceSnap.titre | uppercase }} </h2>
-    <p> {{faceSnap.description}}</p>
+    <div class="bandeau">
+        <span> {{faceSnap.difficulte}} </span>
+        <h2> {{faceSnap.titre | uppercase }} </h2>
+        <p> {{faceSnap.description}}</p>
+    </div>
+    <img [src]="faceSnap.imageUrl" [alt]="faceSnap.titre">
     <button (click)="viewSnap()"> VOIR </button>
     <span> ❤️{{faceSnap.snaps}} </span>
 </div>

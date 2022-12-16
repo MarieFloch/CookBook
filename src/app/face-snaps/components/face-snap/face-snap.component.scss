@@ -2,19 +2,36 @@
     box-sizing: border-box;
     width: 50%;
     margin: 20px auto;
-    padding: 10px 30px;
     box-shadow: lightgray 4px 4px 20px;
+
+    .bandeau {
+      background-color :rgb(197, 136, 173) ;
+      height: 60px;
+    }
 
     h2 {
       margin-bottom: 0;
+      margin-left: 15px ;
     }
+
     p {
       font-weight: 300;
       font-size: 16px;
+      margin-left: 15px ;
+    }
+
+    img {
+      max-width: 50%;
+      max-height: 50%;
+      margin : 15px auto;
+      display: block;
+      border-radius: 10%;
     }
 
     span {
       float: right;
+      margin-right: 15px;
+      margin-top: 5px;
     }
     button {
       background-color: transparent;
@@ -22,7 +39,7 @@
       padding: 5px 10px;
       border: none;
       box-shadow: lightgray 3px 3px 7px;
-      margin-right: 20px;
+      margin: 20px;
       outline: none;
       font-size: 14px;
       font-weight: 500;
