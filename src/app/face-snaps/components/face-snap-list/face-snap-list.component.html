@@ -27,7 +27,17 @@
     </mat-select>
   </mat-form-field>
 
-  <button (click)="choose(selected, selected_difficultes, selected_tri)"> Filtrer</button>
+  <mat-form-field appearance="fill">
+    <mat-label>Temps</mat-label>
+    <mat-select [(value)]="selected_temps">
+      <mat-option value="Tout">Tout</mat-option>
+      <mat-option value="10">10 min</mat-option>
+      <mat-option value="15">15 min</mat-option>
+      <mat-option value="20">20 min</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <button (click)="choose(selected, selected_difficultes, selected_tri, selected_temps)"> Filtrer</button>
 </div>
 
 

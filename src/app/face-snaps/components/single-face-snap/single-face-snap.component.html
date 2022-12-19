@@ -6,8 +6,12 @@
     </p>
     <h2> {{faceSnap.titre | uppercase }} </h2>
     <p> {{faceSnap.description}}</p>
-    <p class="titre"> Ingrédients : </p>
-    <p class="ingredients"> {{faceSnap.ingredients}}</p>
+    <div class = "infos">
+        <p class="temps"> Temps : {{faceSnap.temps}} min </p>
+        <p class="titre"> Ingrédients : </p>
+        <p class="liste"> {{faceSnap.ingredients}}</p>
+    </div>
+
     <p class="titre"> Recette : </p>
     <p class="recette">{{faceSnap.recette}}</p>
     <img [src]="faceSnap.imageUrl" [alt]="faceSnap.titre">

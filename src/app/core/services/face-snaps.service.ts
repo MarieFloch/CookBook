@@ -11,7 +11,18 @@ export class FaceSnapsService {
 
   constructor(private http: HttpClient) { }
 
-  // Recette(s) obtenue(s) par rapport à la difficulté, au type et rangé par ordre croissant de like.
+  /**********************************************************************************************************************
+   * Fonctions permettant de filtrer les recettes
+  **********************************************************************************************************************/
+
+  // Temps.
+  getRecetteByTime(time: number): Observable<FaceSnap[]> {
+    return this.getAllFaceSnaps().pipe(
+      map(facesnaps => [...facesnaps].filter(recette => recette.temps == time)),
+    );
+  }
+
+  // Difficulté + description (type) + ordre décroissant de like.
   getRecetteByDifficulteDescriptionOrderByLike(difficulte: string, description: string): Observable<FaceSnap[]> {
     return this.getAllFaceSnaps().pipe(
       map(facesnaps => [...facesnaps].filter(recette => recette.difficulte == difficulte)
@@ -20,7 +31,17 @@ export class FaceSnapsService {
     );
   }
 
-  // Recette(s) obtenue(s) par rapport à la difficulté et rangé par ordre croissant de like.
+  // Difficulté + description + temps + ordre décroissant de like.
+  getRecetteByDifficulteDescriptionOrderByLikeTime(difficulte: string, description: string, time: number): Observable<FaceSnap[]> {
+    return this.getAllFaceSnaps().pipe(
+      map(facesnaps => [...facesnaps].filter(recette => recette.difficulte == difficulte)
+        .filter(recette => recette.description == description)
+        .filter(recette => recette.temps == time)
+        .sort((a, b) => b.snaps - a.snaps)),
+    );
+  }
+
+  // Difficulté + ordre décroissant de like.
   getRecetteByDifficulteOrderByLike(difficulte: string): Observable<FaceSnap[]> {
     return this.getAllFaceSnaps().pipe(
       map(facesnaps => [...facesnaps].filter(recette => recette.difficulte == difficulte)
@@ -28,38 +49,23 @@ export class FaceSnapsService {
     );
   }
 
-
-  // Recette(s) obtenue(s) par rapport à la description.
-  getRecetteByDescription(description: string): Observable<FaceSnap[]> {
+  // Difficulté + temps + ordre décroissant de like.
+  getRecetteByDifficulteOrderByLikeTime(difficulte: string, time: number): Observable<FaceSnap[]> {
     return this.getAllFaceSnaps().pipe(
-      map(facesnaps => [...facesnaps].filter(recette => recette.description == description)),
-    );
-  }
-
-  // Recette(s) obtenue(s) par rapport à la description ordonnée par nb de like.
-  getRecetteByDescriptionOrderByLike(description: string): Observable<FaceSnap[]> {
-    return this.getAllFaceSnaps().pipe(
-      map(facesnaps => [...facesnaps].filter(recette => recette.description == description)
+      map(facesnaps => [...facesnaps].filter(recette => recette.difficulte == difficulte)
+        .filter(recette => recette.temps == time)
         .sort((a, b) => b.snaps - a.snaps)),
     );
   }
 
-  // Recette(s) obtenue(s) par rapport à la description par ordre alphabétique de description.
-  getRecetteByDescriptionOrder(description: string): Observable<FaceSnap[]> {
-    return this.getAllFaceSnaps().pipe(
-      map(facesnaps => [...facesnaps].filter(recette => recette.description == description)
-      .sort((a, b) => a.titre > b.titre ? 1 : -1)),
-    );
-  }
-
-  // Recette(s) obtenue(s) par rapport à la difficulté.
+  // Difficulté.
   getRecetteByDifficulte(difficulte: string): Observable<FaceSnap[]> {
     return this.getAllFaceSnaps().pipe(
       map(facesnaps => [...facesnaps].filter(recette => recette.difficulte == difficulte)),
     );
   }
 
-  // Recette(s) obtenue(s) par rapport à la difficulté et rangé par ordre alphabétique de titre.
+  // Difficulté + ordre alphabétique de titre.
   getRecetteByDifficulteOrder(difficulte: string): Observable<FaceSnap[]> {
     return this.getAllFaceSnaps().pipe(
       map(facesnaps => [...facesnaps].filter(recette => recette.difficulte == difficulte)
@@ -67,7 +73,24 @@ export class FaceSnapsService {
     );
   }
 
-  // Recette(s) obtenue(s) par rapport à la difficulté et au type.
+  // Difficulté + temps + ordre alphabétique de titre.
+  getRecetteByDifficulteOrderTime(difficulte: string, time: number): Observable<FaceSnap[]> {
+    return this.getAllFaceSnaps().pipe(
+      map(facesnaps => [...facesnaps].filter(recette => recette.difficulte == difficulte)
+        .filter(recette => recette.temps == time)
+        .sort((a, b) => a.titre > b.titre ? 1 : -1)),
+    );
+  }
+
+  // Difficulté + temps.
+  getRecetteByDifficulteTime(difficulte: string, time: number): Observable<FaceSnap[]> {
+    return this.getAllFaceSnaps().pipe(
+      map(facesnaps => [...facesnaps].filter(recette => recette.difficulte == difficulte)
+        .filter(recette => recette.temps == time)),
+    );
+  }
+
+  // Difficulté + description.
   getRecetteByDifficulteDescription(difficulte: string, description: string): Observable<FaceSnap[]> {
     return this.getAllFaceSnaps().pipe(
       map(facesnaps => [...facesnaps].filter(recette => recette.difficulte == difficulte)
@@ -75,7 +98,7 @@ export class FaceSnapsService {
     );
   }
 
-  // Recette(s) obtenue(s) par rapport à la difficulté, au type et rangé par ordre alphabétique de titre.
+  // Difficulté + description + ordre alphabétique de titre.
   getRecetteByDifficulteDescriptionOrder(difficulte: string, description: string): Observable<FaceSnap[]> {
     return this.getAllFaceSnaps().pipe(
       map(facesnaps => [...facesnaps].filter(recette => recette.difficulte == difficulte)
@@ -84,17 +107,93 @@ export class FaceSnapsService {
     );
   }
 
-  // Recettes rangées par ordre alphabétique de titre.
+  // Difficulté + description + temps + ordre alphabétique de titre.
+  getRecetteByDifficulteDescriptionOrderTime(difficulte: string, description: string, time: number): Observable<FaceSnap[]> {
+    return this.getAllFaceSnaps().pipe(
+      map(facesnaps => [...facesnaps].filter(recette => recette.difficulte == difficulte)
+        .filter(recette => recette.description == description)
+        .filter(recette => recette.temps == time)
+        .sort((a, b) => a.titre > b.titre ? 1 : -1)),
+    );
+  }
+
+
+  // Description.
+  getRecetteByDescription(description: string): Observable<FaceSnap[]> {
+    return this.getAllFaceSnaps().pipe(
+      map(facesnaps => [...facesnaps].filter(recette => recette.description == description)),
+    );
+  }
+
+  // Description + temps.
+  getRecetteByDescriptionTime(description: string, time: number): Observable<FaceSnap[]> {
+    return this.getAllFaceSnaps().pipe(
+      map(facesnaps => [...facesnaps].filter(recette => recette.description == description)
+      .filter(recette => recette.temps == time)),
+    );
+  }
+
+  // Description + ordre décroissant de like.
+  getRecetteByDescriptionOrderByLike(description: string): Observable<FaceSnap[]> {
+    return this.getAllFaceSnaps().pipe(
+      map(facesnaps => [...facesnaps].filter(recette => recette.description == description)
+        .sort((a, b) => b.snaps - a.snaps)),
+    );
+  }
+
+  // Description + temps + ordonnée + ordre décroissant de like.
+  getRecetteByDescriptionOrderByLikeTime(description: string, time: number): Observable<FaceSnap[]> {
+    return this.getAllFaceSnaps().pipe(
+      map(facesnaps => [...facesnaps].filter(recette => recette.description == description)
+        .filter(recette => recette.temps == time)
+        .sort((a, b) => b.snaps - a.snaps)),
+    );
+  }
+
+  // Description + ordre alphabétique de description.
+  getRecetteByDescriptionOrder(description: string): Observable<FaceSnap[]> {
+    return this.getAllFaceSnaps().pipe(
+      map(facesnaps => [...facesnaps].filter(recette => recette.description == description)
+        .sort((a, b) => a.titre > b.titre ? 1 : -1)),
+    );
+  }
+
+  // Description + temps + ordre alphabétique de description.
+  getRecetteByDescriptionOrderTime(description: string, time: number): Observable<FaceSnap[]> {
+    return this.getAllFaceSnaps().pipe(
+      map(facesnaps => [...facesnaps].filter(recette => recette.description == description)
+        .filter(recette => recette.temps == time)
+        .sort((a, b) => a.titre > b.titre ? 1 : -1)),
+    );
+  }
+
+  // Ordre alphabétique de titre.
   getRecetteByOrder(): Observable<FaceSnap[]> {
     return this.getAllFaceSnaps().pipe(
       map(facesnaps => [...facesnaps].sort((a, b) => a.titre > b.titre ? 1 : -1)),
     );
   }
 
-  // Recettes rangées par ordre décroissant de like.
+  // Temps + ordre alphabétique de titre.
+  getRecetteByOrderTime(time: number): Observable<FaceSnap[]> {
+    return this.getAllFaceSnaps().pipe(
+      map(facesnaps => [...facesnaps].sort((a, b) => a.titre > b.titre ? 1 : -1)
+        .filter(recette => recette.temps == time)),
+    );
+  }
+
+  // Ordre décroissant de like.
   getRecetteOrderByLike(): Observable<FaceSnap[]> {
     return this.getAllFaceSnaps().pipe(
       map(facesnaps => [...facesnaps].sort((a, b) => b.snaps - a.snaps)),
+    );
+  }
+
+  // Temps + ordre décroissant de like.
+  getRecetteOrderByLikeTime(time: number): Observable<FaceSnap[]> {
+    return this.getAllFaceSnaps().pipe(
+      map(facesnaps => [...facesnaps].sort((a, b) => b.snaps - a.snaps)
+        .filter(recette => recette.temps == time)),
     );
   }
 

@@ -41,12 +41,19 @@
       }
     }
 
-    p.titre {
-      text-decoration: underline;
-      font-weight: 300;
+    .infos {
+      border: 2px solid rgb(157, 86, 130);
+      margin-bottom: 10px;
+      margin-top: 5px;
     }
 
-    p.ingredients {
+    p.titre,p.temps {
+      text-decoration: underline;
+      font-weight: 300;
+      margin-left: 5px;
+    }
+
+    p.liste {
       font-style: italic;
       white-space: pre;
     }

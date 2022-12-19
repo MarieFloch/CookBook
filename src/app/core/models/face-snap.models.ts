@@ -7,6 +7,7 @@ export class FaceSnap {
     date !: Date;
     snaps !: number;
     difficulte ?: string;
+    temps !: number;
     imageUrl !: string;
     localisationImg ?: string;
 

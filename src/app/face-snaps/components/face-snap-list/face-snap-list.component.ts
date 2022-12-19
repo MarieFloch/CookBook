@@ -13,90 +13,136 @@ export class FaceSnapListComponent implements OnInit {
   selected = "Tout";
   selected_difficultes = "Tout";
   selected_tri = "Aucun";
+  selected_temps = "Tout";
+  time !: number;
 
 
   faceSnaps$ !: Observable<FaceSnap[]>;
 
 
-  constructor(private faceSnapsService : FaceSnapsService) { }
+  constructor(private faceSnapsService: FaceSnapsService) { }
 
   ngOnInit(): void {
-    this.choose(this.selected, this.selected_difficultes, this.selected_tri);
+    this.choose(this.selected, this.selected_difficultes, this.selected_tri, this.selected_temps);
 
   }
 
-  choose(type : string, difficulte : string, tri : string) {
+  // Fonction de filtrage.
+  choose(type: string, difficulte: string, tri: string, temps: string) {
 
-    if (type == "Tout" && difficulte == "Tout" ) {
+    this.time = parseInt(temps);
+    console.log("time:",this.time);
+
+    if (type == "Tout" && difficulte == "Tout") {
       if (tri == "Aucun") {
-        console.log(1);
-        this.faceSnaps$ = this.faceSnapsService.getAllFaceSnaps();
+        if (temps == "Tout") {
+          this.faceSnaps$ = this.faceSnapsService.getAllFaceSnaps();
+        }
+        else {
+          this.faceSnaps$ = this.faceSnapsService.getRecetteByOrderTime(this.time);
+        }
       }
-      else if (tri == "Tri par titre"){
-        console.log(2);
-        this.faceSnaps$ = this.faceSnapsService.getRecetteByOrder();
+
+      else if (tri == "Tri par titre") {
+        if (temps != "Tout") {
+          this.faceSnaps$ = this.faceSnapsService.getRecetteByOrderTime(this.time);
+        }
+        else {
+          this.faceSnaps$ = this.faceSnapsService.getRecetteByOrder();
+        }
       }
-      else if (tri == "Tri par like"){
-        console.log(3);
-        this.faceSnaps$ = this.faceSnapsService.getRecetteOrderByLike();
+
+      else if (tri == "Tri par like") {
+        if (temps != "Tout") {
+          this.faceSnaps$ = this.faceSnapsService.getRecetteOrderByLikeTime(this.time);
+        }
+        else {
+          this.faceSnaps$ = this.faceSnapsService.getRecetteOrderByLike();
+        }
       }
     }
 
-    else if(type != "Tout" && difficulte != "Tout" ) {
-      if (tri == "Aucun") {
-        console.log(4);
-        this.faceSnaps$ = this.faceSnapsService.getRecetteByDifficulteDescription(difficulte,type);
+    else if (type != "Tout" && difficulte != "Tout") {
+      if (tri == "Aucun" && temps == "Tout" ) {
+        this.faceSnaps$ = this.faceSnapsService.getRecetteByDifficulteDescription(difficulte, type);
       }
-      else if(tri == "Tri par titre") {
-        console.log(5);
-        this.faceSnaps$ = this.faceSnapsService.getRecetteByDifficulteDescriptionOrder(difficulte,type);
+
+      else if (tri == "Tri par titre") {
+        if (temps != "Tout") {
+              this.faceSnaps$ = this.faceSnapsService.getRecetteByDifficulteDescriptionOrderTime(difficulte, type,this.time);
+        }
+        else {
+          this.faceSnaps$ = this.faceSnapsService.getRecetteByDifficulteDescriptionOrder(difficulte, type);
+        }
       }
-      else if(tri == "Tri par like") {
-        console.log(6);
-        this.faceSnaps$ = this.faceSnapsService.getRecetteByDifficulteDescriptionOrderByLike(difficulte,type);
+
+      else if (tri == "Tri par like") {
+        if (temps != "Tout") {
+              this.faceSnaps$ = this.faceSnapsService.getRecetteByDifficulteDescriptionOrderByLikeTime(difficulte, type,this.time);
+        }
+        else {
+          this.faceSnaps$ = this.faceSnapsService.getRecetteByDifficulteDescriptionOrderByLike(difficulte, type);
+        }
       }
     }
 
-    else if( type == "Tout" && difficulte != "Tout" ){
+    else if (type == "Tout" && difficulte != "Tout") {
       if (tri == "Aucun") {
-        console.log(6);
-        this.faceSnaps$ = this.faceSnapsService.getRecetteByDifficulte(difficulte);
+        if (temps == "Tout") {
+          this.faceSnaps$ = this.faceSnapsService.getRecetteByDifficulte(difficulte);
+        }
+        else {
+          this.faceSnaps$ = this.faceSnapsService.getRecetteByDifficulteTime(difficulte,this.time);
+        }
+
       }
-      else if(tri == "Tri par titre") {
-        console.log(7);
-        this.faceSnaps$ = this.faceSnapsService.getRecetteByDifficulteOrder(difficulte);
+
+      else if (tri == "Tri par titre") {
+        if (temps != "Tout") {
+          this.faceSnaps$ = this.faceSnapsService.getRecetteByDifficulteOrderTime(difficulte,this.time);
+        }
+        else {
+          this.faceSnaps$ = this.faceSnapsService.getRecetteByDifficulteOrder(difficulte);
+        }
       }
-      else if(tri == "Tri par like") {
-        console.log(8);
-        this.faceSnaps$ = this.faceSnapsService.getRecetteByDifficulteOrderByLike(difficulte);
+
+      else if (tri == "Tri par like") {
+        if (temps != "Tout") {
+          this.faceSnaps$ = this.faceSnapsService.getRecetteByDifficulteOrderByLikeTime(difficulte,this.time);
+        }
+        else {
+          this.faceSnaps$ = this.faceSnapsService.getRecetteByDifficulteOrderByLike(difficulte);
+        }
       }
     }
 
-    else if( type != "Tout" && difficulte == "Tout" ){
+    else if (type != "Tout" && difficulte == "Tout") {
       if (tri == "Aucun") {
-        console.log(9);
-        this.faceSnaps$ = this.faceSnapsService.getRecetteByDescription(type);
+        if(temps == "Tout") {
+          this.faceSnaps$ = this.faceSnapsService.getRecetteByDescription(type);
+        }
+        else {
+          this.faceSnaps$ = this.faceSnapsService.getRecetteByDescriptionTime(type,this.time);
+        }
       }
-      else if(tri == "Tri par titre") {
-        console.log(10);
-        this.faceSnaps$ = this.faceSnapsService.getRecetteByDescriptionOrder(type);
+
+      else if (tri == "Tri par titre") {
+        if (temps != "Tout") {
+              this.faceSnaps$ = this.faceSnapsService.getRecetteByDescriptionOrderTime(type,this.time);
+        }
+        else {
+          this.faceSnaps$ = this.faceSnapsService.getRecetteByDescriptionOrder(type);
+        }
       }
-      else if(tri == "Tri par like") {
-        console.log(11);
-        this.faceSnaps$ = this.faceSnapsService.getRecetteByDescriptionOrderByLike(type);
+
+      else if (tri == "Tri par like") {
+        if (temps != "Tout") {
+          this.faceSnaps$ = this.faceSnapsService.getRecetteByDescriptionOrderByLikeTime(type,this.time);
+        }
+        else {
+          this.faceSnaps$ = this.faceSnapsService.getRecetteByDescriptionOrderByLike(type);
+        }
       }
     }
-
-
-
-
-
-    /*if (tri == "Tri par titre") {
-      this.faceSnaps$= this.faceSnapsService.getRecetteByOrder();
-    }*/
-
   }
-
-
-
 }
